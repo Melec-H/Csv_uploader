@@ -1,24 +1,21 @@
-# README
+Bonjour/Bonsoir
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Alors voilà mon code se trouve lib/tasks/import.rake, j'ai aussi fait un import2.rake pour importer un buldings2.csv.
 
-Things you may want to cover:
+Je run en commande *bundle exec rake import:buildings* pour l'executer.
 
-* Ruby version
+Il y a une petit seed pour remplir Building
 
-* System dependencies
+J'ai créé Building.namestock pour stocker les précédents 'manager_name'.
 
-* Configuration
+En fait j'avais oublié mais je ne suis pas arrivé à facilement faire en sorte que namestock soit un Array. (à cause de sqlite3 ?). 
+J'ai donc opter pour une autre manière:  
+Building.namestock n'est donc pas un array mais un text_field où je rajoute les manager_name séparés par une virgule.
+Je .split ensuite lors du code.
 
-* Database creation
+note: J'ai codé et push via le mac que j'ai récupéré d'une tante, les commit ne sont pas encore à mon nom via cet ordinateur. Mais c'est bien moi!
 
-* Database initialization
+note: Je suis bien conscient de la faute d'orthographe "bu_lding.csv" 
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Melec du Halgouet
