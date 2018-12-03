@@ -8,10 +8,10 @@
 
 
 buildings = [
-    [["1", "10 Rue La bruyère", "75009", "Paris", "France", "Martin Faure"],
-    ["2", "40 Rue René Clair", "75018", "Paris", "France", "Martin Faure"]]
+    ["1", "10 Rue La bruyère", "75009", "Paris", "France", "Martin Faure"],
+    ["2", "40 Rue René Clair", "75018", "Paris", "France", "Martin Faure"]
 ]
 
 buildings.each do |ref, address, zip, city, country, name|
-    Building.create( reference: ref, adress: address, zip_code: zip, city: city, country: country, manager_name: name)
+    Building.create( reference: ref, address: address, zip_code: zip, city: city, country: country, manager_name: name)
 end

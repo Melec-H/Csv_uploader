@@ -1,54 +1,16 @@
 require 'csv'
 
-include ActiveModel::Dirty
+#include ActiveModel::Dirty
 
 namespace :import do 
     task buildings: :environment do
-       filename =  "../csv/buldings.csv"
+       filename =  "../csv/buldings.csv"  #içi mon app rails est sur mon bureau, les .csv dans un dossier csv aussi sur le bureau
         CSV.foreach(filename, headers: true) do |row|
 
-            update_buildings_namestock(row[0], row['manager_name'])
+            update_buildings_namestock(row[0], row['manager_name'])          
 
-
-
-            
-            
-            
         end
     end
-end
-
-#def ischanged? (ref, attribute)
-#    
-#    check = Building.where(reference: ref).select(:id, attribute.to_symbol)
-#    p check.changed?
-
-#end
-
-
-
-def check_if_same_manager_name(stock, name)
-
-    string = stock.namestock
-    p "string: #{string}"
-    array = string.split(',')
-    p "array: #{array}"
-    array.each do |x| 
-        p x
-        p name
-
-        if x == name 
-            @a = 'same'
-            p "name:#{name} is already in Building.namestock"
-            break
-        else 
-            @a = 'different'          
-        end
-
-        p @a
-    end
-
-    return @a
 end
 
 
@@ -57,11 +19,6 @@ def update_buildings_namestock(ref, name)
     stock = Building.where(reference: ref).select(:id, :namestock).take 
     
     if stock != nil 
-
-        #si namestock est vide (ce qui n'est pas normal selon ma methode de resolution de l'exercice
-        #puisque c'est lors de create.building que l'on stockera
-        #pour la premere fois manager_name dans namestock) / c'est pour l'exercice.
-        
         if stock.namestock == nil || stock.namestock == '' 
 
             building = Building.find(ref)
@@ -73,11 +30,11 @@ def update_buildings_namestock(ref, name)
 
             p "#{name} was added to manager_name"
     
-        elsif check_if_same_manager_name(stock, name) == 'different' #si name != de tous les éléments de namestock
+        elsif check_if_same_manager_name(stock, name) == 'different' #-- si name != de tous les éléments de namestock
             
-            building = Building.find(ref) #on stocke la ligne du record 
-            manager_name = building.namestock  #on selectionne l'attribut namestock de cette ligne
-            add_to_stock = manager_name + "," + name #on stock dans add_to_stock ce que contient namestock + le nouveau manager_name
+            building = Building.find(ref) 
+            manager_name = building.namestock  
+            add_to_stock = manager_name + "," + name #-- ICI le stockage du manager_name
 
             building.update_attribute(:namestock, add_to_stock) #...puis on update :namestock dans la database
 
@@ -92,6 +49,31 @@ def update_buildings_namestock(ref, name)
             
         end      
     end
+end
+
+def check_if_same_manager_name(stock, name) #-- Fonction qui regarde namestock et manager_name puis return same/different 
+
+    string = stock.namestock
+    p "string: #{string}"
+    array = string.split(',') #-- ICI je .split namestock...
+    p "array: #{array}"
+
+    array.each do |x| #-- POUR itérer et return different tant que chaque element de namestock est différent de manager_name
+        p x
+        p name
+
+        if x == name 
+            @a = 'same'
+            p "name:#{name} is already in Building.namestock"
+            break
+        else 
+            @a = 'different'          
+        end
+
+        p @a
+    end
+
+    @a
 end
 
 
