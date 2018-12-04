@@ -3,15 +3,61 @@ require 'csv'
 #include ActiveModel::Dirty
 
 namespace :import do 
-    task buildings: :environment do
-       filename =  "../csv/buldings2.csv"  #içi mon app rails est sur mon bureau, les .csv dans un dossier csv aussi sur le bureau
+    task buildings2: :environment do
+       filename =  "../csv/buldings.csv"  #içi mon app rails est sur mon bureau, les .csv dans un dossier csv aussi sur le bureau
         CSV.foreach(filename, headers: true) do |row|
 
-            update_buildings_namestock(row[0], row['manager_name'])          
-
+            #update_buildings_namestock(row[0], row['manager_name'])  
+              
+            name = row['manager_name']
+            p name
+            ref = row['reference']
+            p ref
+            if check(ref, name) == "different"
+                p 'avant création record'
+                Building.create(reference: row['reference'], address: row['address'], zip_code: row['zip_code'], city: row['city'], country: row['country'], manager_name: row['manager_name'])
+            elsif check(ref, name) == 'same'
+                p "#{@a}"
+                p 'abborded maybe because "same"'
+            else
+                p 'elsed'
+            end
         end
     end
 end
+
+def check(ref, name)
+
+    building_by_ref = Building.where(reference: ref)
+    p "building_by_ref: #{building_by_ref}"
+
+    ids = building_by_ref.ids
+
+    p "ids: #{ids}"
+
+    ids.each do |id|
+        old_name = Building.find(id).manager_name
+        p "old_name: #{old_name}"
+        p "name: #{name}"
+        if old_name == name
+            @a = 'same'     
+            break 
+        else
+            
+            @a = 'different'
+            p @a
+            
+        end
+        p "last @a: #{@a}"
+
+    end
+    p "last @a: #{@a}"
+    @a
+end
+
+
+
+
 
 
 def update_buildings_namestock(ref, name)
