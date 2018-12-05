@@ -4,7 +4,7 @@ require 'csv'
 
 namespace :import do 
     task buildings2: :environment do
-       filename =  "../csv/buldings.csv"  #içi mon app rails est sur mon bureau, les .csv dans un dossier csv aussi sur le bureau
+       filename =  "../csv/buldings2.csv"  #içi mon app rails est sur mon bureau, les .csv dans un dossier csv aussi sur le bureau
         CSV.foreach(filename, headers: true) do |row|
 
             #update_buildings_namestock(row[0], row['manager_name']) 
