@@ -1,6 +1,6 @@
 class Building < ApplicationRecord
 
-	def self.record_creation_function(ref, address, zip, city, country, name)
+	def self.record_creation_for_building(ref, address, zip, city, country, name)
 
 		if Building.is_csv_manager_name_value_different_from_records_values?(ref, name) == 'true'
 			Building.create(reference: ref, address: address, zip_code: zip, city: city, country: country, manager_name: name)

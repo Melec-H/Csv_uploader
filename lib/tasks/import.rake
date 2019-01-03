@@ -12,7 +12,7 @@ namespace :import do
 			country = row['country']
 			name = row['manager_name']
 					
-			Building.record_creation_function(ref, address, zip, city, country, name)
+			Building.record_creation_for_building(ref, address, zip, city, country, name)
 		end
 	end
 
@@ -27,7 +27,7 @@ namespace :import do
 			last = row['lastname']
 			address = row['address']
 
-			Person.record_creation_function(ref, email, home, mobile, first, last, address)
+			Person.record_creation_for_person(ref, email, home, mobile, first, last, address)
 
 		end   
 	end    

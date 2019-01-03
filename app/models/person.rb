@@ -1,6 +1,6 @@
 class Person < ApplicationRecord
 
-	def self.record_creation_function(ref, email, home, mobile, first, last, address)
+	def self.record_creation_for_person(ref, email, home, mobile, first, last, address)
 
 		attribute_list_with_csv_values = {email: email, home_phone_number: home, mobile_phone_number: mobile, address: address}
 		hash_containing_values_for_the_new_record = {}
