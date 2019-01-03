@@ -15,14 +15,14 @@ class Building < ApplicationRecord
 	
 		record_by_building_reference.each do |building|
 
-				previous_names = building.manager_name
-
-				if previous_names == csv_manager_name 
-						@a = 'false'
-						break		
-				else
-						@a = 'true'
-				end				
+			previous_names = building.manager_name
+		
+			if previous_names == csv_manager_name 
+				@a = 'false'
+				break		
+			else
+				@a = 'true'
+			end				
 		end
 		@a
 	end
