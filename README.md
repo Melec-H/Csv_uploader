@@ -1,24 +1,11 @@
-Bonjour/Bonsoir
+Hello,
 
-Alors voilà mon code se trouve lib/tasks/import.rake, j'ai aussi fait un import2.rake pour importer un buldings2.csv.
+the importation tasks are in lib/tasks/import.rake
 
-Je run en commande *bundle exec rake import:buildings2* pour l'executer.
+The function record_creation_for_building in models/buildings.rb create a new record if the manager_name in the CSV is different from every manager_name's value from the records where the reference is the same. Else it does nothing.
 
-Il y a une petit seed pour remplir Building
+The function record_creation_for_person in models/person.rb always create a new record. The new record attributes value are either the value from the last record about that person or the value contained in the CSV.
 
-EDIT 
----
-j'ai déplacé les fonctions dans models/buildings.rb 
-j'ai supprimé la collonne namestock qui servait à stocker les anciennes valeurs de manager_name
-J'ai remplacé cela par un système d'historique (je crée des records et regarde grace à la référence des buildings si le manager_name des records du csv match avec les manager_name des anciens records dans la db)
-
-
-
-
-
-note: J'ai codé et push via le mac que j'ai récupéré d'une tante, les commit ne sont pas encore à mon nom via cet ordinateur. Mais c'est bien moi!
-
-note: Je suis bien conscient de la faute d'orthographe "bu_lding.csv" 
 
 
 Melec du Halgouet
